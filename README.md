@@ -19,5 +19,5 @@ You can watch the Pathfind3r in action here -> [Youtube Video](https://www.youtu
 
 ##Project Page
 For more info please visit the project page.
-[Project Page](www.okanulas.com/pathfind3r/)
+[Project Page](http://www.okanulas.com/pathfind3r/)
 

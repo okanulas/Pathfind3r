@@ -15,9 +15,9 @@ Basic flow of data is: Command -> Web Interface -> Php Script -> Python Socket S
 3. Php 5.
 
 ##Demo
-You can watch the Pathfind3r in action here -> youtube link will be here soon.
+You can watch the Pathfind3r in action here -> [Youtube Video](https://www.youtube.com/watch?v=tg4IwxdkICM)
 
 ##Project Page
 For more info please visit the project page.
-www.okanulas.com/pathfinder/
+[Project Page](www.okanulas.com/pathfind3r/)
 

@@ -49,6 +49,10 @@ SOFTWARE.
 				<img src="images/btn_start_server.png"/>
 				</button>
 			</div>
+			<!-- STOP SERVER -->
+			<div class="menu_row">
+				<button class="grey_wide_button" id="stop_server">STOP SERVER</button>
+			</div>
 			<!-- CLEAR CONSOLE -->
 			<div class="menu_row">
 				<button class="grey_wide_button" id="clear_console">CLEAR CONSOLE</button>
@@ -202,6 +206,17 @@ $( "body" ).keyup(function(e) {
 		logMessage(data);
 		});
 		})
+
+// STOP SERVER BUTTON
+		$('#stop_server').click(function(){
+		$.post( "python_socket_server.php", { action: "stop_server" })
+		.done(function( data ) {
+		logMessage(data);
+		});
+		})
+
+
+
 // PAPER FEED
 		$('#feed_paper_in').click(function(){
 		$.post( "python_socket_server.php", { action: "send",data:"feed_paper_in" })

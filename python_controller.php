@@ -35,29 +35,29 @@ if($_POST["action"])
 	{
 		$action  = $_POST["action"];
 		if($action == "calibrate"){
-			$calibrate = shell_exec('sudo python /var/www/pathfinder/python/calibrate.py ' );
+			$calibrate = shell_exec('sudo python ./python/calibrate.py ' );
 			echo "Calibrate ".$calibrate;
 		}else if ($action == "set_up_pen"){
-			$penPos = shell_exec('sudo python /var/www/pathfinder/python/set_pen_position.py ' );
+			$penPos = shell_exec('sudo python ./python/set_pen_position.py ' );
 			echo "Pen Position ".$penPos;
 		}else if ($action == "draw_svg"){
 			$svgData = array('file' =>$_POST["svg_file"]);
-			$drawSvg = shell_exec('sudo python /var/www/pathfinder/python/draw_svg.py '. escapeshellarg(json_encode($svgData)).'  2>&1' );
+			$drawSvg = shell_exec('sudo python ./python/draw_svg.py '. escapeshellarg(json_encode($svgData)).'  2>&1' );
 			echo $drawSvg;
 		}else if ($action == "draw_maze"){
 			$rows = $_POST["rows"];
 			$cols = $_POST["cols"];
 			$gridSize = $_POST["grid_size"];
 			$mazeData = array('rows' =>$rows,'cols'=>$cols,'gridSize'=>$gridSize);
-			$maze = shell_exec('sudo python /var/www/pathfinder/python/draw_maze.py '. escapeshellarg(json_encode($mazeData))); // .'  2>&1'
+			$maze = shell_exec('sudo python ./python/draw_maze.py '. escapeshellarg(json_encode($mazeData))); // .'  2>&1'
 			echo $maze;
 		}else if ($action == "get_info"){
-			$info = shell_exec('sudo python /var/www/pathfinder/python/get_info.py');
+			$info = shell_exec('sudo python ./python/get_info.py');
 			$infoResult = json_decode($info, true);
 			var_dump($infoResult);
 
 		}else if ($action == "stop_printer"){
-			$stopMotors = shell_exec('python /var/www/pathfinder/python/stop_printer.py');
+			$stopMotors = shell_exec('python ./python/stop_printer.py');
 			echo $stopMotors;
 		}
 	}

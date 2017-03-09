@@ -148,7 +148,7 @@ class LegoPrinter:
             self.current_draw_Item = None
 
     def start_draw(self):
-        print "Start Drawing"
+        print ("Start Drawing")
         while self.current_draw_Item is not None:
             if self.current_draw_Item.t == DrawAction.PEN_UP:
                 self.pen_up()
@@ -196,9 +196,9 @@ class LegoPrinter:
                 y_dcsp = math.ceil(max(0, (min(100, y_dcsp))))
 
                 # print "Ratio:", ratio, "X DCSP:", x_dcsp, "Y DCSP:", y_dcsp, "ToX:", to_x, "ToY:", to_y, "DX:", dx, "DY:", dy
-                print ("CX:", self.current_draw_Item.x, "CY:", self.current_draw_Item.y)
+                print ("CX:"+ self.current_draw_Item.x+ "CY:"+ self.current_draw_Item.y)
                 if self.prev_draw_Item is not None:
-                    print ("PX", self.prev_draw_Item.x, "PY:", self.prev_draw_Item.y)
+                    print ("PX"+ self.prev_draw_Item.x+"PY:"+ self.prev_draw_Item.y)
 
                 x_completed = True
                 y_completed = True

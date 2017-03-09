@@ -145,7 +145,7 @@ class Client(Thread):
                         if self.is_receiver is False:
                             self.socket.sendall(reply)
                         for c in clients:
-                            c.sendall(reply)
+                            c.sendall(bytes(reply, 'UTF-8'))
         finally:
             with clients_lock:
                 if self.is_receiver is True:

@@ -216,7 +216,7 @@ def parse_maze(w, h, gs, s, sh, sw):
     prev_pos = None
 
     for r in result:
-        print ">>", r.x, r.y
+        print (">>"+ r.x+":"+ r.y)
         if prev_pos is None:
             draw_list.append(DrawAction(DrawAction.PEN_UP))
             draw_list.append(DrawAction(DrawAction.PEN_MOVE, sx + (r.x - 1) * grid_size + grid_size * 0.5,

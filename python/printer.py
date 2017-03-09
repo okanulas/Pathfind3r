@@ -196,9 +196,9 @@ class LegoPrinter:
                 y_dcsp = math.ceil(max(0, (min(100, y_dcsp))))
 
                 # print "Ratio:", ratio, "X DCSP:", x_dcsp, "Y DCSP:", y_dcsp, "ToX:", to_x, "ToY:", to_y, "DX:", dx, "DY:", dy
-                print "CX:", self.current_draw_Item.x, "CY:", self.current_draw_Item.y
+                print ("CX:", self.current_draw_Item.x, "CY:", self.current_draw_Item.y)
                 if self.prev_draw_Item is not None:
-                    print "PX", self.prev_draw_Item.x, "PY:", self.prev_draw_Item.y
+                    print ("PX", self.prev_draw_Item.x, "PY:", self.prev_draw_Item.y)
 
                 x_completed = True
                 y_completed = True
@@ -303,7 +303,7 @@ class LegoPrinter:
             timer += 1
             if timer > max_time:
                 waiting_paper = False
-                print "User not provided the paper on time.. Quiting"
+                print ("User not provided the paper on time.. Quiting")
                 self.is_busy = False
                 return
 

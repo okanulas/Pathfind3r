@@ -72,7 +72,7 @@ class Client(Thread):
 
                     reply = "received:"
                     reply += data
-                    print data
+                    print (data)
                     if data == "feed_paper_in":
                         reply += "feeding paper in"
                         lego_printer.manual_paper_feed(1)

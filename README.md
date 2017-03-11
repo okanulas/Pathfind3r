@@ -14,7 +14,7 @@ Basic flow of data is: Command -> Web Interface -> Php Script -> Python Socket S
 3. Apache.
 3. Php 5.
 
-#Installation
+## Installation
 
 1. Install Ev3dev from http://www.ev3dev.org/docs/getting-started/ . Latest tested and working version is ev3dev-jessie-ev3-generic-2017-02-11
 2. Follow instructions at http://www.ev3dev.org/docs/tutorials/connecting-to-ev3dev-with-ssh/ and connect to ev3 brick using terminal.
@@ -28,7 +28,7 @@ Basic flow of data is: Command -> Web Interface -> Php Script -> Python Socket S
 4. Open your browser and goto the http://[ip_of_your_brick]/pathfind3r/info.php . If should see info about php installation. If there is something wrong try installing php again.
 5. Open http://[ip_of_your_brick]/pathfind3r/
 
-# Usage
+## Usage
 1. Connect your motors:
 	* A > Rail Motor
 	* B > Paper Feed Motor
@@ -41,13 +41,13 @@ Basic flow of data is: Command -> Web Interface -> Php Script -> Python Socket S
 7. You need to press calibrate each time you start the server.
 8. Put the pen in its place and turn the motor by hand until the pen touches the paper. Then press check button next to pen button. You can check pen up and down status using up and down buttons.
 
-#SVG Drawing
+## SVG Drawing
 Download Inkscape at https://inkscape.org/en/download/ .Goto Edit>Preferences .Select Input/Output>SVG Output> Path Data should be Absolute. Create a new document and set size to 1000x1000px. Start drawing with path tool. This version only sports vertical, horizontal and diagonal lines. Curves and circles are not supported. Select Inkscape svg when saving your file. Upload to the brick using web interface. You should see list of uploads when you click "Draw Svg" button. Select one and press print. Thats all.
 
-##Demo
+## Demo
 You can watch the Pathfind3r in action here -> [Youtube Video](https://www.youtube.com/watch?v=tg4IwxdkICM)
 
-##Project Page
+## Project Page
 For more info please visit the project page.
 [Project Page](http://www.okanulas.com/pathfind3r/)
 

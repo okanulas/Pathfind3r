@@ -14,6 +14,36 @@ Basic flow of data is: Command -> Web Interface -> Php Script -> Python Socket S
 3. Apache.
 3. Php 5.
 
+#Installation
+
+1. Install Ev3dev from http://www.ev3dev.org/docs/getting-started/ . Latest tested and working version is ev3dev-jessie-ev3-generic-2017-02-11
+2. Follow instructions at http://www.ev3dev.org/docs/tutorials/connecting-to-ev3dev-with-ssh/ and connect to ev3 brick using terminal.
+3. Run Below commands
+⋅⋅*sudo apt-get update
+⋅⋅*sudo apt-get dist-upgrade
+..*sudo apt-get install apache2 php5 libapache2-mod-php5
+..*sudo /etc/init.d/apache2 restart
+..*sudo mkdir /var/www/html/pathfind3r/
+..*sudo git clone https://github.com/okanulas/Pathfind3r.git /var/www/html/pathfind3r/
+4. Open your browser and goto the http://[ip_of_your_brick]/pathfind3r/info.php . If should see info about php installation. If there is something wrong try installing php again.
+5. Open http://[ip_of_your_brick]/pathfind3r/
+
+# Usage
+1. Connect your motors:
+..* A > Rail Motor
+..* B > Paper Feed Motor
+..* C > Pen Motor
+2. Connect Touch Sensor to Input 1
+3. Open http://[ip_of_your_brick]/pathfind3r/
+4. Click Start Server button and wait for "Server is started" call.
+5. Press Display Info button and check if every is ok.
+6. Use arrow keys and space bar to check motors.
+7. You need to press calibrate each time you start the server.
+8. Put the pen in its place and turn the motor by hand until the pen touches the paper. Then press check button next to pen button. You can check pen up and down status using up and down buttons.
+
+#SVG Drawing
+Download Inkscape at https://inkscape.org/en/download/ .Goto Edit>Preferences .Select Input/Output>SVG Output> Path Data should be Absolute. Create a new document and set size to 1000x1000px. Start drawing with path tool. This version only sports vertical, horizontal and diagonal lines. Curves and circles are not supported. Select Inkscape svg when saving your file. Upload to the brick using web interface. You should see list of uploads when you click "Draw Svg" button. Select one and press print. Thats all.
+
 ##Demo
 You can watch the Pathfind3r in action here -> [Youtube Video](https://www.youtube.com/watch?v=tg4IwxdkICM)
 

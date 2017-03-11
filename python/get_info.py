@@ -36,7 +36,7 @@ class BrickInfo:
     @staticmethod
     def get_motor_info(motor):
         info = dict(connected='true', address=motor.address, duty_cyle=motor.duty_cycle, position=motor.position,
-                    stop_command=motor.stop_command, polarity=motor.polarity)
+                    stop_action=motor.stop_action, polarity=motor.polarity)
         return info
 
     def get_info(self):
@@ -56,7 +56,7 @@ class BrickInfo:
 
         # rail motor
         try:
-            rail_motor = LargeMotor(OUTPUT_A)
+            rail_motor = LargeMotor('outA')
             rail_data = self.get_motor_info(rail_motor)
         except:
             # There is no color sensor
@@ -64,7 +64,7 @@ class BrickInfo:
 
         # paper motor
         try:
-            paper_motor = LargeMotor(OUTPUT_B)
+            paper_motor = LargeMotor('outB')
             paper_data = self.get_motor_info(paper_motor)
         except:
             # There is no color sensor
@@ -72,7 +72,7 @@ class BrickInfo:
 
         # pen motor
         try:
-            pen_motor = LargeMotor(OUTPUT_B)
+            pen_motor = LargeMotor('outC')
             pen_data = self.get_motor_info(pen_motor)
         except:
             # There is no color sensor

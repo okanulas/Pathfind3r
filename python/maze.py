@@ -92,14 +92,14 @@ def parse_maze(w, h, gs, s, sh, sw):
     print(len(sh[0]))
     rows = len(sh)
     cols = len(sh[0])
-    for row in xrange(rows):
-        for col in xrange(cols):
+    for row in range(rows):
+        for col in range(cols):
             if sh[row][col] == "+--":
                 hor[row][col] = 1
 
     rows = len(sw)
-    for row in xrange(rows):
-        for col in xrange(len(sw[row])):
+    for row in range(rows):
+        for col in range(len(sw[row])):
             if sw[row][col] == "|  ":
                 ver[row][col] = 1
 
@@ -119,9 +119,9 @@ def parse_maze(w, h, gs, s, sh, sw):
 
     rows = len(hor)
     cols = len(hor[0])
-    for row in xrange(rows):
+    for row in range(rows):
         prev_pos = False
-        for col in xrange(cols):
+        for col in range(cols):
             if 0 < row < rows - 1:
                 if hor[row][col] == 1:
                     if prev_pos is False:
@@ -142,9 +142,9 @@ def parse_maze(w, h, gs, s, sh, sw):
 
     rows = len(ver)
     cols = len(ver[0])
-    for col in xrange(cols):
+    for col in range(cols):
         prev_pos = False
-        for row in xrange(rows):
+        for row in range(rows):
             if 0 < col < cols - 1:
                 if ver[row][col] == 1:
                     if prev_pos is False:
@@ -216,7 +216,7 @@ def parse_maze(w, h, gs, s, sh, sw):
     prev_pos = None
 
     for r in result:
-        print (">>"+ r.x+":"+ r.y)
+        print (">>"+ str(r.x)+":"+ str(r.y))
         if prev_pos is None:
             draw_list.append(DrawAction(DrawAction.PEN_UP))
             draw_list.append(DrawAction(DrawAction.PEN_MOVE, sx + (r.x - 1) * grid_size + grid_size * 0.5,

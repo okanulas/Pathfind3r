@@ -32,7 +32,8 @@ import math
 import time
 from time import sleep
 
-from ev3dev.auto import *
+from ev3dev.ev3 import *
+from ev3dev.auto import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 
 from draw_action import DrawAction
 
@@ -66,6 +67,10 @@ class LegoPrinter:
         self.prev_draw_Item = None
         self.pen_is_adjustable = True
 
+        self.rail_motor_max_speed =100
+        self.paper_motor_max_speed =100
+        self.pen_motor_max_speed =100
+
     def reset_motors(self):
         self.reset_rail_motor()
         self.reset_paper_motor()
@@ -73,20 +78,35 @@ class LegoPrinter:
 
     def reset_rail_motor(self):
         self.rail_motor.reset()
-        self.rail_motor.stop_command = Motor.STOP_COMMAND_HOLD
-        self.rail_motor.duty_cycle_sp = 50
+        self.rail_motor.stop_action = Motor.STOP_ACTION_HOLD
+        self.rail_motor.speed_sp = 600
         self.rail_motor.polarity = Motor.POLARITY_INVERSED
+        self.rail_motor_max_speed = self.rail_motor.max_speed
+        self.rail_motor.position_p = 80000
+        self.rail_motor.position_i = 400  
+        self.rail_motor.position_d = 0
+        self.rail_motor.speed_p = 1000
+        self.rail_motor.speed_i = 60
+        self.rail_motor.speed_d = 0
 
     def reset_paper_motor(self):
         self.paper_motor.reset()
-        self.paper_motor.stop_command = Motor.STOP_COMMAND_HOLD
-        self.paper_motor.duty_cycle_sp = 50
+        self.paper_motor.stop_action = Motor.STOP_ACTION_HOLD
+        self.paper_motor.speed_sp = 600
         self.paper_motor.polarity = Motor.POLARITY_INVERSED
+        self.paper_motor_max_speed = self.paper_motor.max_speed
+        self.paper_motor.position_p = 80000
+        self.paper_motor.position_i = 400  
+        self.paper_motor.position_d = 0
+        self.paper_motor.speed_p = 1000
+        self.paper_motor.speed_i = 60
+        self.paper_motor.speed_d = 0
 
     def reset_pen_motor(self):
         self.pen_motor.reset()
-        self.pen_motor.stop_command = Motor.STOP_COMMAND_HOLD
-        self.pen_motor.duty_cycle_sp = 50
+        self.pen_motor.stop_action = Motor.STOP_ACTION_HOLD
+        self.pen_motor.speed_sp = 600
+        self.pen_motor_max_speed = self.pen_motor.max_speed
 
     def force_stop(self):
         self.draw_list = []
@@ -99,24 +119,24 @@ class LegoPrinter:
         self.is_busy = False
 
     # Switch the pen motor adjustment state.
-    # Pen motor can be adjusted in STOP_COMMAND_BRAKE state
+    # Pen motor can be adjusted in stop_action_BRAKE state
     def switch_pen_state(self):
         if self.pen_is_adjustable is False:
             self.pen_is_adjustable = True
-            self.pen_motor.stop_command = Motor.STOP_COMMAND_BRAKE
+            self.pen_motor.stop_action = Motor.STOP_ACTION_BRAKE
         else:
             self.pen_is_adjustable = True
-            self.pen_motor.stop_command = Motor.STOP_COMMAND_HOLD
+            self.pen_motor.stop_action = Motor.STOP_ACTION_HOLD
 
     def pen_up(self):
         if self.is_pen_up is False:
             self.is_pen_up = True
-            self.pen_motor.run_to_abs_pos(position_sp=50, duty_cycles_sp=30)
+            self.pen_motor.run_to_abs_pos(position_sp=50, speed_sp=600)
 
     def pen_down(self):
         if self.is_pen_up is True:
             self.is_pen_up = False
-            self.pen_motor.run_to_abs_pos(position_sp=0, duty_cycles_sp=30)
+            self.pen_motor.run_to_abs_pos(position_sp=0, speed_sp=600)
 
     # Draws the elements in the draw_list
     def draw(self, draw_list):
@@ -196,20 +216,20 @@ class LegoPrinter:
                 y_dcsp = math.ceil(max(0, (min(100, y_dcsp))))
 
                 # print "Ratio:", ratio, "X DCSP:", x_dcsp, "Y DCSP:", y_dcsp, "ToX:", to_x, "ToY:", to_y, "DX:", dx, "DY:", dy
-                print ("CX:"+ self.current_draw_Item.x+ "CY:"+ self.current_draw_Item.y)
+                print ("CX:"+ str(self.current_draw_Item.x)+ "CY:"+ str(self.current_draw_Item.y))
                 if self.prev_draw_Item is not None:
-                    print ("PX"+ self.prev_draw_Item.x+"PY:"+ self.prev_draw_Item.y)
+                    print ("PX"+ str(self.prev_draw_Item.x)+"PY:"+ str(self.prev_draw_Item.y))
 
                 x_completed = True
                 y_completed = True
 
                 if dx > 0:
                     x_completed = False
-                    self.rail_motor.run_to_abs_pos(position_sp=to_x, duty_cycle_sp=x_dcsp)
+                    self.rail_motor.run_to_abs_pos(position_sp=to_x, speed_sp=x_dcsp*10)
 
                 if dy > 0:
                     y_completed = False
-                    self.paper_motor.run_to_abs_pos(position_sp=to_y, duty_cycle_sp=y_dcsp)
+                    self.paper_motor.run_to_abs_pos(position_sp=to_y, speed_sp=y_dcsp*10)
 
                 start_time = time.time()
                 while self.current_draw_Item is not None and (x_completed is False or y_completed is False):
@@ -234,19 +254,19 @@ class LegoPrinter:
             self.draw_next_item()
 
     def manual_paper_feed_inc(self, direction):
-        self.paper_motor.run_forever(duty_cycle_sp=30 * direction)
+        self.paper_motor.run_forever(speed_sp=400 * direction)
 
     def manual_paper_feed_inc_stop(self):
         self.paper_motor.stop()
 
     def manual_paper_feed(self, direction):
-        self.paper_motor.run_forever(duty_cycle_sp=50 * direction)
+        self.paper_motor.run_forever(speed_sp=400 * direction)
 
     def stop_paper_feed(self):
         self.reset_paper_motor()
 
     def manual_move_x(self, direction):
-        self.rail_motor.run_forever(duty_cycle_sp=30 * direction)
+        self.rail_motor.run_forever(speed_sp=600 * direction)
 
     def manual_stop_x(self):
         self.rail_motor.stop()
@@ -265,7 +285,7 @@ class LegoPrinter:
         Sound.speak('Calibrating Motor Positions').wait()
 
         self.rail_motor.polarity = Motor.POLARITY_INVERSED
-        self.rail_motor.run_forever(duty_cycle_sp=-50)
+        self.rail_motor.run_forever(speed_sp=-500)
 
         wait_for_button_press = True
         while wait_for_button_press:
@@ -273,7 +293,7 @@ class LegoPrinter:
                 wait_for_button_press = False
                 self.rail_motor.stop()
                 self.reset_rail_motor()
-                self.rail_motor.run_to_abs_pos(position_sp=100, duty_cycle_sp=100)
+                self.rail_motor.run_to_abs_pos(position_sp=100, speed_sp=600)
 
         self.motors_calibrated = True
         self.is_busy = False
@@ -284,8 +304,8 @@ class LegoPrinter:
 
     def set_pen_position(self):
         self.pen_motor.reset()
-        self.pen_motor.stop_command = Motor.STOP_COMMAND_BRAKE
-        self.pen_motor.duty_cycle_sp = 100
+        self.pen_motor.stop_action = Motor.STOP_ACTION_BRAKE
+        self.pen_motor.speed_sp = 600
 
     def feed_paper(self):
 
@@ -296,7 +316,7 @@ class LegoPrinter:
         timer = 0
         max_time = 1000
 
-        self.paper_motor.run_forever(duty_cycle_sp=-50)
+        self.paper_motor.run_forever(speed_sp=-400)
 
         waiting_paper = True
         while waiting_paper:
@@ -307,7 +327,7 @@ class LegoPrinter:
                 self.is_busy = False
                 return
 
-        self.paper_motor.run_to_rel_pos(position_sp=-40, duty_cycle_sp=10)
+        self.paper_motor.run_to_rel_pos(position_sp=-40, speed_sp=500)
         sleep(0.5)
 
         self.reset_paper_motor()

@@ -26,7 +26,8 @@
 
 import json
 
-from ev3dev.auto import *
+from ev3dev.ev3 import *
+from ev3dev.auto import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
 
 
 class BrickInfo:

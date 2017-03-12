@@ -28,8 +28,6 @@ import socket
 import xml.sax
 from threading import *
 
-from ev3dev.auto import *
-
 from get_info import BrickInfo
 from maze import make_maze
 from maze import parse_maze

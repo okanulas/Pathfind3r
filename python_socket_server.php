@@ -52,11 +52,11 @@ if(isset($_POST["action"])){
 		socket_close($socket);
 	}elseif ($action == "start_server") {
 
-		putenv('PYTHONPATH=/var/www/.local/lib/python2.7/site-packages:/var/www/.local/lib/python2.7/site-packages:');
-		$start_server = shell_exec('sudo python ./python/socket_server.py' );
+		// putenv('PYTHONPATH=/var/www/.local/lib/python2.7/site-packages:/var/www/.local/lib/python2.7/site-packages:');
+		$start_server = shell_exec('sudo python3 ./python/socket_server.py' );
 	}elseif ($action == "stop_server") {
 
-		putenv('PYTHONPATH=/var/www/.local/lib/python2.7/site-packages:/var/www/.local/lib/python2.7/site-packages:');
+		// putenv('PYTHONPATH=/var/www/.local/lib/python2.7/site-packages:/var/www/.local/lib/python2.7/site-packages:');
 		echo shell_exec('sudo sudo killall python -9  2>&1' );
 	}
 }

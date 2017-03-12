@@ -14,6 +14,14 @@ Basic flow of data is: Command -> Web Interface -> Php Script -> Python Socket S
 3. Apache.
 3. Php 5.
 
+## Permissions
+Super user permisions are needed to run python scripts from php server.  
+1. Open sudoers using command sudo visudo
+2. Add following entry under "# User privilege specification" after root: 'www-data ALL=(ALL) NOPASSWD:ALL'
+	*![alt tag](http://www.okanulas.com/pathfind3r/files/visudo.png)
+3. Hit Ctrl+X, Accept changes and quit.
+
+
 ## Installation
 
 1. Install Ev3dev from http://www.ev3dev.org/docs/getting-started/ . Latest tested and working version is ev3dev-jessie-ev3-generic-2017-02-11

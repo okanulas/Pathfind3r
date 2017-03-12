@@ -28,6 +28,9 @@ import socket
 import xml.sax
 from threading import *
 
+from ev3dev.ev3 import *
+from ev3dev.auto import OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D
+
 from get_info import BrickInfo
 from maze import make_maze
 from maze import parse_maze

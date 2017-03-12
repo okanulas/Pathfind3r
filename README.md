@@ -19,7 +19,7 @@ Super user permisions are needed to run python scripts from php server.
 
 1. Open sudoers using command sudo visudo.
 2. Add following entry under "# User privilege specification" after root: 'www-data ALL=(ALL) NOPASSWD:ALL'
-	*![alt tag](http://www.okanulas.com/pathfind3r/files/visudo.png | width=400)
+	*![](http://www.okanulas.com/pathfind3r/files/visudo.png =400x)
 3. Hit Ctrl+X, Accept changes and quit.
 
 

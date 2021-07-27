@@ -58,7 +58,7 @@ Super user permisions are needed to run python scripts from php server.
 
 Download Inkscape at https://inkscape.org/en/download/. Goto Edit>Preferences. Select Input/Output>SVG Output> Path Data should be Absolute. Create a new document and set size to 1000x1000px. Start drawing with path tool. This version only sports vertical, horizontal and diagonal lines. Curves and circles are not supported. Select Inkscape svg when saving your file. Upload to the brick using web interface. You should see list of uploads when you click "Draw Svg" button. Select one and press print. Thats all.
 
-##Building Instructions
+## Building Instructions
 You can see a PDF of the building instructions [here](pathfind3r.pdf).
 
 ## Demo
